@@ -13,14 +13,15 @@ struct Position {
     int row;
     int col;
 };
+bool operator==(Position a, Position b);
 
 typedef std::function<double(const Position&, const Position&)> Metric;
 double EuclideanDistance(const Position&, const Position&);
 double OctileDistance(const Position&, const Position&);
 
-class IllFormatedMapError : public std::runtime_error {
+class IllFormedMapError : public std::runtime_error {
 public:
-    IllFormatedMapError(const std::string& reason);
+    IllFormedMapError(const std::string& reason);
 };
 
 class Map {
@@ -48,6 +49,6 @@ protected:
     std::vector<std::vector<bool>> map_;  // value determines whether the cell is traversable or not
 };
 
-};
+}
 
 #endif
