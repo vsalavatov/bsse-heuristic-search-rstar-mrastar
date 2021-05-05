@@ -1,8 +1,28 @@
 #include "map.h"
 
 #include <fstream>
+#include <cmath>
+#include <algorithm>
 
 namespace heuristicsearch {
+
+/**
+ * Metrics
+ */
+
+double EuclideanDistance(const Position &a, const Position &b) {
+    double dr = a.row - b.row;
+    double dc = a.col - b.col;
+    return sqrt(dr*dr + dc*dc);
+}
+
+double OctileDistance(const Position &a, const Position &b) {
+    double dr = fabs(a.row - b.row);
+    double dc = fabs(a.col - b.col);
+    double forw = std::min(dr, dc);
+    double diag = std::max(dr, dc) - forw;
+    return forw + sqrt(diag*diag);
+}
 
 /**
  * IllFormatedMapError

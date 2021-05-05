@@ -5,17 +5,22 @@
 #include <filesystem>
 #include <vector>
 #include <exception>
+#include <functional>
 
 namespace heuristicsearch {
-
-class IllFormatedMapError : public std::runtime_error {
-public:
-    IllFormatedMapError(const std::string& reason);
-};
 
 struct Position {
     int row;
     int col;
+};
+
+typedef std::function<double(const Position&, const Position&)> Metric;
+double EuclideanDistance(const Position&, const Position&);
+double OctileDistance(const Position&, const Position&);
+
+class IllFormatedMapError : public std::runtime_error {
+public:
+    IllFormatedMapError(const std::string& reason);
 };
 
 class Map {
