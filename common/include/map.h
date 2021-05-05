@@ -13,6 +13,11 @@ public:
     IllFormatedMapError(const std::string& reason);
 };
 
+struct Position {
+    int row;
+    int col;
+};
+
 class Map {
 public:
     Map(const Map&) = default;
@@ -26,8 +31,8 @@ public:
     std::size_t getHeight() const;
     std::size_t getWidth() const;
 
-    bool inBounds(int row, int col) const;
-    bool isTraversable(int row, int col) const;
+    bool inBounds(Position pos) const;
+    bool isTraversable(Position pos) const;
     
 protected:
     Map();

@@ -21,12 +21,12 @@ std::size_t Map::getWidth() const {
     return width_;
 }
 
-bool Map::inBounds(int row, int col) const {
-    return row >= 0 && row < height_ && col >= 0 && col < width_;
+bool Map::inBounds(Position pos) const {
+    return pos.row >= 0 && pos.row < height_ && pos.col >= 0 && pos.col < width_;
 }
 
-bool Map::isTraversable(int row, int col) const {
-    return map_[row][col];
+bool Map::isTraversable(Position pos) const {
+    return map_[pos.row][pos.col];
 }
 
 inline static bool symIsTraversable(char c) {

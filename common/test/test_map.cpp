@@ -15,5 +15,5 @@ TEST_CASE("check MovingAI map loader") {
     };
     for (int i = 0; i < 4; ++i)
         for (int j = 0; j < 5; ++j)
-            REQUIRE(map.isTraversable(i, j) == expected[i][j]);
+            REQUIRE(map.isTraversable(Position{i, j}) == expected[i][j]);
 }
