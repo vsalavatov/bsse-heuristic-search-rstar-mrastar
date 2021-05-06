@@ -17,8 +17,8 @@ double EuclideanDistance(const Position &a, const Position &b) {
 }
 
 double OctileDistance(const Position &a, const Position &b) {
-    double dr = fabs(a.row - b.row);
-    double dc = fabs(a.col - b.col);
+    double dr = abs(a.row - b.row);
+    double dc = abs(a.col - b.col);
     double diag = std::min(dr, dc);
     double forw = std::max(dr, dc) - diag;
     return forw + diag * sqrt(2.0);

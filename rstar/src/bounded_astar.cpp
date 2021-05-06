@@ -22,7 +22,7 @@ BoundedAStarResult BoundedAStar(
     open.addNodeOrDecreasePriority(startPos, priority(startPos));
 
     std::size_t doneExpansions = 0;
-    double lastfval;
+    double lastfval = 1e18;
     while (!open.isEmpty() && doneExpansions < maxExpansions) {
         auto [node, fval] = open.popMin();
         lastfval = fval;
