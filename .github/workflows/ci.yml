@@ -10,7 +10,7 @@ jobs:
       - name: configure
         run: mkdir build && cd build && cmake ..
       - name: build
-        run: cmake --build build
+        run: cmake --build build --verbose
       - name: test
         run: |
              ./build/common/common_unit_test
