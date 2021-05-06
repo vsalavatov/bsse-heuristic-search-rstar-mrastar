@@ -5,7 +5,8 @@ namespace heuristicsearch {
 std::optional<HeuristicAlgoResult> AStar(
     const Map& map, 
     Position startPos, Position goalPos, 
-    std::function<double(Position, Position)> heuristic)
+    Metric heuristic,
+    Metric dist)
 {
     auto open = OpenSet<Position, double>();
 
@@ -24,7 +25,7 @@ std::optional<HeuristicAlgoResult> AStar(
             break;
         
         for (auto& succ : map.getNeighbors(node)) {
-            auto newGValue = gvalue[node] + EuclideanDistance(node, succ);
+            auto newGValue = gvalue[node] + dist(node, succ);
             if (!gvalue.contains(succ) || gvalue[succ] > newGValue) {
                 gvalue[succ] = newGValue;
                 parent[succ] = node;

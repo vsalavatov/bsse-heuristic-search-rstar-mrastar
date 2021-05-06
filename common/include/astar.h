@@ -21,7 +21,8 @@ namespace heuristicsearch {
 std::optional<HeuristicAlgoResult> AStar(
     const Map& map, 
     Position startPos, Position goalPos, 
-    std::function<double(Position, Position)> heuristic
+    Metric heuristic,
+    Metric dist = EuclideanDistance
 );
 
 }
