@@ -10,6 +10,7 @@ add_executable(unit_test
     test/test_map.cpp
     test/test_scenario.cpp
     test/test_open.cpp
+    test/test_closed.cpp
 )
 target_link_libraries(unit_test common Catch2::Catch2)
 target_include_directories(unit_test PUBLIC include/)
