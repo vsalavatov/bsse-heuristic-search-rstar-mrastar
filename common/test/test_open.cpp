@@ -1,36 +1,36 @@
 #include "open.h"
-#include "node.h"
+#include "position.h"
 
 #include <catch2/catch.hpp>
+#include <memory>
+
 
 TEST_CASE("check OpenSet") {
     using namespace heuristicsearch;
-    auto open = OpenSet<SearchNode, double>();
-    auto f = [](auto sn) -> double { return sn.gvalue + sn.hvalue; };
+    auto open = OpenSet<Position, double>();
     
-    auto n1 = SearchNode{1, 1, 10, 5};
+    auto n1 = Position(1, 1);
     REQUIRE(open.isEmpty());
     REQUIRE(open.size() == 0);
-    open.addNodeOrDecreasePriority(n1, f(n1));
+    open.addNodeOrDecreasePriority(n1, 15);
     REQUIRE(!open.isEmpty());
     REQUIRE(open.size() == 1);
     auto [minn, minf] = open.popMin();
     REQUIRE(open.isEmpty());
-    REQUIRE(minf == f(n1));
+    REQUIRE(minf == 15);
     REQUIRE(minn == n1);
     
-    open.addNodeOrDecreasePriority(n1, f(n1));
-    n1.hvalue -= 10;
-    open.addNodeOrDecreasePriority(n1, f(n1));
+    open.addNodeOrDecreasePriority(n1, 15);
+    open.addNodeOrDecreasePriority(n1, 5);
     REQUIRE(open.size() == 1);
     std::tie(minn, minf) = open.popMin();
-    REQUIRE(minf == f(n1));
+    REQUIRE(minf == 5);
     REQUIRE(minn == n1);
     REQUIRE(open.isEmpty());
 
-    auto n2 = SearchNode{2, 2, 0, -123, static_cast<Position>(n1)};
-    open.addNodeOrDecreasePriority(n1, f(n1));
-    open.addNodeOrDecreasePriority(n2, f(n2));
+    auto n2 = Position(2, 2);
+    open.addNodeOrDecreasePriority(n1, 5);
+    open.addNodeOrDecreasePriority(n2, -2);
     REQUIRE(open.size() == 2);
     std::tie(minn, minf) = open.popMin();
     REQUIRE(minn == n2);

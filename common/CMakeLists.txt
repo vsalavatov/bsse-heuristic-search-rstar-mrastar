@@ -1,7 +1,8 @@
 add_library(common STATIC 
     src/map.cpp
     src/scenario.cpp
-    src/node.cpp
+    src/position.cpp
+    src/astar.cpp
 )
 target_include_directories(common PUBLIC include/)
 
@@ -11,6 +12,7 @@ add_executable(unit_test
     test/test_scenario.cpp
     test/test_open.cpp
     test/test_closed.cpp
+    test/test_astar.cpp
 )
 target_link_libraries(unit_test common Catch2::Catch2)
 target_include_directories(unit_test PUBLIC include/)

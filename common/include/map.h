@@ -7,17 +7,16 @@
 #include <exception>
 #include <functional>
 
-namespace heuristicsearch {
+#include "position.h"
 
-struct Position {
-    int row;
-    int col;
-};
-bool operator==(Position a, Position b);
+
+namespace heuristicsearch {
 
 typedef std::function<double(const Position&, const Position&)> Metric;
 double EuclideanDistance(const Position&, const Position&);
 double OctileDistance(const Position&, const Position&);
+
+double pathLength(const std::vector<Position> &path, Metric m = EuclideanDistance);
 
 class IllFormedMapError : public std::runtime_error {
 public:
@@ -40,6 +39,8 @@ public:
     bool inBounds(Position pos) const;
     bool isTraversable(Position pos) const;
     
+    std::vector<Position> getNeighbors(Position pos) const;
+    
 protected:
     Map();
 
@@ -48,6 +49,8 @@ protected:
 
     std::vector<std::vector<bool>> map_;  // value determines whether the cell is traversable or not
 };
+
+bool validatePath(const Map &map, const std::vector<Position> &path);
 
 }
 

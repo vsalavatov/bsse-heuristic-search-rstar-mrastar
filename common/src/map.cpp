@@ -7,14 +7,6 @@
 namespace heuristicsearch {
 
 /**
- * Position
- */
-
-bool operator==(Position a, Position b) {
-    return a.row == b.row && a.col == b.col;
-}
-
-/**
  * Metrics
  */
 
@@ -30,6 +22,13 @@ double OctileDistance(const Position &a, const Position &b) {
     double forw = std::min(dr, dc);
     double diag = std::max(dr, dc) - forw;
     return forw + sqrt(diag*diag);
+}
+
+double pathLength(const std::vector<Position> &path, Metric m) {
+    double r = 0.0;
+    for (std::size_t i = 0; i + 1 < path.size(); i++) 
+        r += m(path[i], path[i + 1]);
+    return r;
 }
 
 /**
@@ -56,6 +55,27 @@ bool Map::inBounds(Position pos) const {
 
 bool Map::isTraversable(Position pos) const {
     return map_[pos.row][pos.col];
+}
+
+std::vector<Position> Map::getNeighbors(Position pos) const {
+    std::vector<Position> result;
+    result.reserve(8);
+    for (int dr = -1; dr <= 1; dr++) {
+        for (int dc = -1; dc <= 1; dc++) {
+            if (dr == 0 && dc == 0) continue;
+            Position np{pos.row + dr, pos.col + dc};
+            if (!inBounds(np) || !isTraversable(np)) continue;
+            if (abs(dr) + abs(dc) == 1) {
+                result.push_back(np);
+                continue;
+            } 
+            Position pp1{np.row, pos.col}, pp2{pos.row, np.col};
+            if (isTraversable(pp1) && isTraversable(pp2)) {
+                result.push_back(np);
+            }
+        }
+    }
+    return result;
 }
 
 inline static bool symIsTraversable(char c) {
@@ -100,6 +120,19 @@ Map Map::fromMovingAI(std::filesystem::path path) {
     }
 
     return result;
+}
+
+bool validatePath(const Map &map, const std::vector<Position> &path) {
+    for (std::size_t i = 0; i < path.size(); i++) {
+        if (!map.inBounds(path[i]) || !map.isTraversable(path[i]))
+            return false;
+    }
+    for (std::size_t i = 0; i + 1 < path.size(); i++) {
+        auto n = map.getNeighbors(path[i]);
+        if (std::find(n.begin(), n.end(), path[i + 1]) == n.end()) 
+            return false;
+    }
+    return true;
 }
 
 }
