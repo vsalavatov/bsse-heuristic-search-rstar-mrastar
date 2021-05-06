@@ -15,6 +15,11 @@ bool operator<(const Position &a, const Position &b) {
     return a.row < b.row || (a.row == b.row && a.col < b.col);
 }
 
+std::ostream& operator<<(std::ostream& o, const Position &p) {
+    o << "[" << p.row << "," << p.col << "]";
+    return o;
+}
+
 } // namespace heuristicsearch
 
 namespace std {
