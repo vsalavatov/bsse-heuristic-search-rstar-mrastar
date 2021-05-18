@@ -9,7 +9,7 @@ TEST_CASE("check OpenSet") {
     using namespace heuristicsearch;
     auto open = OpenSet<Position, double>();
     
-    auto n1 = Position(1, 1);
+    auto n1 = Position{1, 1};
     REQUIRE(open.isEmpty());
     REQUIRE(open.size() == 0);
     open.addNodeOrDecreasePriority(n1, 15);
@@ -28,7 +28,7 @@ TEST_CASE("check OpenSet") {
     REQUIRE(minn == n1);
     REQUIRE(open.isEmpty());
 
-    auto n2 = Position(2, 2);
+    auto n2 = Position{2, 2};
     open.addNodeOrDecreasePriority(n1, 5);
     open.addNodeOrDecreasePriority(n2, -2);
     REQUIRE(open.size() == 2);

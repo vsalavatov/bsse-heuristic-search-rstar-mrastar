@@ -22,7 +22,6 @@ public:
 
     static std::vector<Scenario> fromMovingAI(std::filesystem::path);
 protected:
-    Scenario() = default;
     Scenario(std::string mapName, 
              std::size_t mapHeight, std::size_t mapWidth, 
              const Position& from, const Position& to, double bestDistance);

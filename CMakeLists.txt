@@ -11,3 +11,4 @@ find_package(Catch2 REQUIRED)
 enable_testing()
 
 add_subdirectory(common)
+add_subdirectory(rstar)
