@@ -12,3 +12,4 @@ enable_testing()
 
 add_subdirectory(common)
 add_subdirectory(rstar)
+add_subdirectory(mrastar)

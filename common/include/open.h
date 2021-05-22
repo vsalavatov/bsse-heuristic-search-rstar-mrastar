@@ -21,6 +21,7 @@ public:
     bool isEmpty() const;
     void addNodeOrDecreasePriority(const SNode &snode, const Priority &p);
     std::pair<SNode, Priority> popMin(); // pops a SNode with the lowest priority
+    Priority minPriority();
 private:
     std::unordered_map<SNode, Priority> existingElems_;
     std::set<std::pair<Priority, SNode>> heap_;
@@ -57,6 +58,10 @@ std::pair<SNode, Priority> OpenSet<SNode, Priority>::popMin() {
     return {elem.second, elem.first};
 }
 
+template<class SNode, class Priority>
+Priority OpenSet<SNode, Priority>::minPriority() {
+    return heap_.begin()->first;
+}
 
 }
 
