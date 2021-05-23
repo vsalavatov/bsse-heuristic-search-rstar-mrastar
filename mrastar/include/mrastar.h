@@ -21,8 +21,8 @@ class MRAStar {
 public:
     explicit MRAStar(
         const std::set<int>& cellSizes,
-        double weight = 2.0,
-        double suboptimalityCoef = 3.0,
+        double weight,
+        double suboptimalityCoef,
         ChooseQueueMethod chooseQueueMethod = ChooseQueueMethod{}
     );
 
