@@ -17,11 +17,15 @@ namespace heuristicsearch {
 template<class SNode, class Priority>
 class OpenSet {
 public:
+    using NodeType = SNode;
+    using PriorityType = Priority;
+
     std::size_t size() const;
     bool isEmpty() const;
     void addNodeOrDecreasePriority(const SNode &snode, const Priority &p);
+    void deleteNode(const SNode &snode);
     std::pair<SNode, Priority> popMin(); // pops a SNode with the lowest priority
-    Priority minPriority();
+    Priority minPriority() const;
 private:
     std::unordered_map<SNode, Priority> existingElems_;
     std::set<std::pair<Priority, SNode>> heap_;
@@ -50,6 +54,14 @@ void OpenSet<SNode, Priority>::addNodeOrDecreasePriority(const SNode &snode, con
     }
 }
 
+    template<class SNode, class Priority>
+void OpenSet<SNode, Priority>::deleteNode(const SNode &snode) {
+    if (auto it = existingElems_.find(snode); it != existingElems_.end()) {
+        heap_.erase(heap_.find({it->second, it->first}));
+        existingElems_.erase(it);
+    }
+}
+
 template<class SNode, class Priority>
 std::pair<SNode, Priority> OpenSet<SNode, Priority>::popMin() {
     auto elem = *heap_.begin();
@@ -59,7 +71,7 @@ std::pair<SNode, Priority> OpenSet<SNode, Priority>::popMin() {
 }
 
 template<class SNode, class Priority>
-Priority OpenSet<SNode, Priority>::minPriority() {
+Priority OpenSet<SNode, Priority>::minPriority() const {
     return heap_.begin()->first;
 }
 

@@ -2,7 +2,7 @@ add_library(mrastar STATIC
     src/mrastar.cpp
     src/multi_resolution_map.cpp
 )
-target_link_libraries(mrastar common)
+target_link_libraries(mrastar common ${Boost_LIBRARIES})
 target_include_directories(mrastar PUBLIC
     include/
     ../common/include/

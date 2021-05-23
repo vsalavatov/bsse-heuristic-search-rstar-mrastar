@@ -11,7 +11,7 @@ TEST_CASE("check MRA* with octile heuristic") {
     auto scenarios = Scenario::fromMovingAI("dataset/sample-moving-ai-2.map.scen");
     for (auto &scen : scenarios) {
         auto hfunc = OctileDistance;
-        auto optres = MRAStar({2, 3, 4}, 1.5, 1.5)(map, scen.start, scen.finish, hfunc);
+        auto optres = MRAStar({2, 3, 4}, 1.5, 1.05)(map, scen.start, scen.finish, hfunc);
         REQUIRE(optres.has_value());
         auto result = *optres;
         REQUIRE(result.path[0] == scen.start);
@@ -31,8 +31,10 @@ TEST_CASE("check MRA* suboptimality") {
         }
         auto& scen = scenarios[sc];
         auto hfunc = OctileDistance;
-        for (double suboptimalityCoef : {1.1, 3.0, 7.0}) {
-            auto optres = MRAStar({2, 4, 8, 16, 32, 64}, suboptimalityCoef, suboptimalityCoef)(
+        for (auto [weight, suboptimalityCoef] : std::vector<std::pair<double, double>>{
+            {1.1, 2.0}, {3.0, 5.0}, {7.0, 9.0}}
+        ) {
+            auto optres = MRAStar({2, 4, 8}, weight, suboptimalityCoef)(
                 map, scen.start, scen.finish, hfunc
             );
             REQUIRE(optres.has_value());
