@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -O2")
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake/")
 find_package(Catch2 REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost 1.70.0 REQUIRED)
 
 enable_testing()
 
