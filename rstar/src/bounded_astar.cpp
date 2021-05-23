@@ -5,7 +5,8 @@ using namespace heuristicsearch;
 
 
 BoundedAStarResult BoundedAStar(
-    std::size_t maxExpansions,
+    double fvalThreshold,
+    double weight,
     const Map& map, 
     Position startPos, Position goalPos, 
     Metric heuristic,
@@ -16,19 +17,20 @@ BoundedAStarResult BoundedAStar(
     std::unordered_map<Position, double> gvalue;
     std::unordered_map<Position, Position> parent;
 
-    auto priority = [&](Position node) -> double { return gvalue[node] + heuristic(node, goalPos); };
+    auto priority = [&](Position node) -> double { return gvalue[node] + weight * heuristic(node, goalPos); };
 
     gvalue[startPos] = 0;
     open.addNodeOrDecreasePriority(startPos, priority(startPos));
 
     std::size_t doneExpansions = 0;
-    double lastfval = 1e18;
-    while (!open.isEmpty() && doneExpansions < maxExpansions) {
+    while (!open.isEmpty()) {
         auto [node, fval] = open.popMin();
-        lastfval = fval;
         
         if (gvalue.contains(goalPos) && fval > gvalue[goalPos]) 
             break;
+        if (fval > fvalThreshold) {
+            return BoundedAStarResult{ std::nullopt, doneExpansions, gvalue[node] + heuristic(node, goalPos) }; // uninflated!
+        }
         
         doneExpansions++;
         for (auto& succ : map.getNeighbors(node)) {
@@ -42,9 +44,11 @@ BoundedAStarResult BoundedAStar(
     }
     
     if (!gvalue.contains(goalPos)) {
-        if (open.isEmpty())
-            return BoundedAStarResult{ std::nullopt, doneExpansions, 1e18 };
-        return BoundedAStarResult{ std::nullopt, doneExpansions, lastfval };
+        if (open.isEmpty()) {
+            return BoundedAStarResult{ std::nullopt, doneExpansions, 1e100 };
+        }
+        auto [node, _] = open.popMin();
+        return BoundedAStarResult{ std::nullopt, doneExpansions, gvalue[node] + heuristic(node, goalPos) }; // uninflated!
     }
     
     std::vector<Position> path;

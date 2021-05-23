@@ -6,15 +6,18 @@
 
 #include <unordered_map>
 #include <unordered_set>
-#include <algorithm>
 #include <cmath>
+#include <iostream>
 
 using namespace heuristicsearch;
 
+const double RStar::EPS = 1e-8;
 
-RStar::RStar(double delta, std::size_t k, std::size_t maxBAStarExpansions, 
-             std::size_t randomSeed, std::size_t smartItersCoef, double rangeLowCoef) 
-    : delta_{delta}, k_{k}, maxExpansions_{maxBAStarExpansions}, 
+RStar::RStar(double delta, std::size_t k, double weight,
+          double thresholdInflationFactor, 
+          std::size_t smartItersCoef, double rangeLowCoef, 
+          std::size_t randomSeed)
+    : delta_{delta}, k_{k}, thresholdInflationFactor_{thresholdInflationFactor}, weight_{weight},
       randomSeed_{randomSeed}, smartItersCoef_{smartItersCoef}, rangeLowCoef_{rangeLowCoef}
 {}
 
@@ -29,7 +32,7 @@ std::optional<HeuristicAlgoResult> RStar::operator()(
     auto closed = ClosedSet<Position>();
 
     std::unordered_map<Position, double> gvalue;
-    std::unordered_set<Position> avoid;
+    std::unordered_map<Position, int> avoid;
     std::unordered_map<Position, std::pair<Position, std::vector<Position>>> parent; 
     // parent -> value is {parent in Gamma, actual path on the map}
     std::unordered_map<Position, std::vector<Position>> gammaBackEdges;
@@ -37,18 +40,24 @@ std::optional<HeuristicAlgoResult> RStar::operator()(
     // node -> backEdges, forall n in backEdges: node in succs(n) 
     
     auto updateState = [&](Position node) {
-        int priority = (gvalue[node] > heuristic(startPos, node) || (avoid.contains(node) && parent[node].second.size() == 0)) ? 1 : 0;        
-        open.addNodeOrDecreasePriority(node, {priority, gvalue[node] + heuristic(node, goalPos)});
+        if (gvalue[node] > weight_ * heuristic(startPos, node) + EPS) {
+            if (!avoid.contains(node))
+                avoid[node] = 1;
+        }
+        open.addNodeOrDecreasePriority(node, {avoid[node], gvalue[node] + weight_ * heuristic(node, goalPos)});
     };
 
     auto reevaluateState = [&](Position node) {
         auto bpNode = parent[node].first;
-        BoundedAStarResult basr = BoundedAStar(maxExpansions_, map, bpNode, node, heuristic, dist);
+        auto thresh = cLow[{bpNode, node}] * thresholdInflationFactor_;
+        if (thresh < weight_ * heuristic(bpNode, node) + EPS)
+            thresh = weight_ * heuristic(bpNode, node) + EPS;
+        BoundedAStarResult basr = BoundedAStar(thresh, weight_, map, bpNode, node, heuristic, dist);
         if (basr.result) {
-            parent[node].second = std::move(basr.result->path);
+            parent[node].second = std::move(basr.result->path);            
         }
         cLow[{bpNode, node}] = basr.goalCostLowerBound;
-        if (parent[node].second.size() == 0 || gvalue[bpNode] + cLow[{bpNode, node}] > heuristic(startPos, node)) {
+        if (parent[node].second.empty() || gvalue[bpNode] + cLow[{bpNode, node}] > weight_ * heuristic(startPos, node) + EPS) {
             Position bestPar = bpNode;
             double bestParCost = gvalue[bpNode] + cLow[{bpNode, node}];
             for (auto &backEdge : gammaBackEdges[node]) {
@@ -62,7 +71,7 @@ std::optional<HeuristicAlgoResult> RStar::operator()(
                 parent[node].first = bestPar;
                 parent[node].second.clear();
             }
-            avoid.insert(node);
+            avoid[node] = 1;
             bpNode = parent[node].first;
         }
         gvalue[node] = gvalue[bpNode] + cLow[{bpNode, node}];
@@ -70,14 +79,14 @@ std::optional<HeuristicAlgoResult> RStar::operator()(
     };
 
     gvalue[startPos] = 0;
-    open.addNodeOrDecreasePriority(startPos, {0, heuristic(startPos, goalPos)});
+    open.addNodeOrDecreasePriority(startPos, {0, weight_ * heuristic(startPos, goalPos)});
     while (!open.isEmpty()) {
         auto [node, fval] = open.popMin();
 
-        if (gvalue.contains(goalPos) && fval > std::pair{static_cast<int>(avoid.contains(goalPos)), gvalue[goalPos]}) 
+        if (parent.contains(goalPos) && !parent[goalPos].second.empty() && fval >= std::pair{avoid[goalPos], gvalue[goalPos]})
             break;
-        
-        if (node != startPos && parent[node].second.size() == 0) {
+            
+        if (node != startPos && parent[node].second.empty()) {
             reevaluateState(node);
             continue;
         }
@@ -99,6 +108,7 @@ std::optional<HeuristicAlgoResult> RStar::operator()(
             if (!gvalue.contains(next) || costEst < gvalue[next]) {
                 gvalue[next] = costEst;
                 parent[next].first = node;
+                parent[next].second.clear();
                 updateState(next);
             }
         }

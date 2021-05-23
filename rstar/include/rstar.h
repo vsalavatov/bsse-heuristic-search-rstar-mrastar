@@ -12,8 +12,10 @@
 
 class RStar {
 public:
-    RStar(double delta, std::size_t k, std::size_t maxBAStarExpansions, 
-          std::size_t randomSeed = 239, std::size_t smartItersCoef = 8, double rangeLowCoef = 0.5);
+    RStar(double delta, std::size_t k, double weight,
+          double thresholdInflationFactor = 1.3, 
+          std::size_t smartItersCoef = 8, double rangeLowCoef = 0.0, 
+          std::size_t randomSeed = 239);
 
     std::optional<heuristicsearch::HeuristicAlgoResult> operator()(
         const heuristicsearch::Map& map, 
@@ -27,11 +29,14 @@ protected:
 
     double delta_;
     std::size_t k_;
-    std::size_t maxExpansions_;
+    double thresholdInflationFactor_;
+    double weight_;
     std::size_t randomSeed_;
     mutable std::mt19937 randomGen_;
     const std::size_t smartItersCoef_;
     const double rangeLowCoef_;
+
+    static const double EPS;
 };
 
 #endif
