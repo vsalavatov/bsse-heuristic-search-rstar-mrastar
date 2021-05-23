@@ -12,7 +12,6 @@ jobs:
              sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa
              sudo apt update
              sudo apt install g++-10
-             sudo apt install libboost-all-dev
       - name: configure
         env:
           CXX: g++-10
