@@ -16,7 +16,7 @@ struct BoundedAStarResult {
 };
 
 BoundedAStarResult BoundedAStar(
-    std::size_t maxExpansions,
+    double fvalThreshold, double weight,
     const heuristicsearch::Map& map, 
     heuristicsearch::Position startPos, heuristicsearch::Position goalPos, 
     heuristicsearch::Metric heuristic,
