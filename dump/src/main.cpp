@@ -10,6 +10,7 @@
 #include <exception>
 #include <fstream>
 #include <chrono>
+#include <iomanip>
 
 
 
@@ -166,14 +167,14 @@ int main(int argc, char* argv[]) {
     const size_t rssFinish = getPeakRSS();
     const auto timeFinish = high_resolution_clock::now();
     os << "memory " << (rssFinish - rssStart) << '\n';
-    os << "time " << std::setprecision(6) << duration_cast<milliseconds>(timeFinish - timeStart).count() / 1000.0 << '\n';
+    os << "time " << std::fixed << std::setprecision(6) << duration_cast<microseconds>(timeFinish - timeStart).count() / 1e6 << '\n';
 
     if (!optres.has_value()) {
         os << "no path\n";
     } else {
         auto result = *optres;
         os << "expansions " << result.expansions << '\n';
-        os << "distance " << std::setprecision(10) << result.distance << '\n';
+        os << "distance " << std::fixed << std::setprecision(6) << result.distance << '\n';
         os << "path " << result.path.size() << "\n";        
         for (const auto& p : result.path) {
             os << p.row << " " << p.col << "\n";
