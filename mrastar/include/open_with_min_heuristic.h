@@ -33,7 +33,7 @@ public:
     }
 
 private:
-    OpenSetT openH;
+    heuristicsearch::OpenSet<NodeType, PriorityType> openH;
 };
 
 #endif
