@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         ("rstar_delta", "R* delta", cxxopts::value<double>())
         ("rstar_k", "R* k", cxxopts::value<std::size_t>())
         ("rstar_weight", "R* weight", cxxopts::value<double>())
-        ("rstar_ti_factor", "R* threshold inflation factor", cxxopts::value<double>()->default_value("1.3"))
+        ("rstar_ti_factor", "R* threshold inflation factor", cxxopts::value<double>()->default_value("5.0"))
         ("rstar_smart_iters_coef", "R* smart iters coef", cxxopts::value<std::size_t>()->default_value("8"))
         ("rstar_range_low_coef", "R* range low coef", cxxopts::value<double>()->default_value("0"))
         ("mrastar_cell_sizes", "MRA* cell sizes", cxxopts::value<std::vector<std::size_t>>())

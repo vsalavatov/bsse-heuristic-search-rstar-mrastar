@@ -129,9 +129,9 @@ def run_rstar(map_path, params, task, timeout, resultsdir):
         msg = f'Expected "delta", "k", "weight" fields in R* parametrization: {params}'
         status_report(msg, True)
         raise AssertionError(msg)
-    ti_factor = params.get('threshold_inflation_factor', 1.3)
+    ti_factor = params.get('threshold_inflation_factor', 5.0)
     smart_iters_coef = params.get('smart_iters_coef', 8)
-    range_log_coef = params.get('range_log_coef', 0.0)
+    range_low_coef = params.get('range_low_coef', 0.0)
     run_dump([
         './build/dump/dump',
         '--out', logfile,
@@ -144,7 +144,7 @@ def run_rstar(map_path, params, task, timeout, resultsdir):
         '--rstar_weight', str(weight),
         '--rstar_ti_factor', str(ti_factor),
         '--rstar_smart_iters_coef', str(smart_iters_coef),
-        '--rstar_range_low_coef', str(range_log_coef)
+        '--rstar_range_low_coef', str(range_low_coef)
     ], timeout, logfile)
 
 

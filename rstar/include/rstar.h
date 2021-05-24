@@ -21,7 +21,7 @@ template <class OpenSetT = heuristicsearch::OpenSet<heuristicsearch::Position, s
 class RStar {
 public:
     RStar(double delta, std::size_t k, double weight,
-          double thresholdInflationFactor = 1.3, 
+          double thresholdInflationFactor = 5.0, 
           std::size_t smartItersCoef = 8, double rangeLowCoef = 0.0, 
           std::size_t randomSeed = 239);
 
