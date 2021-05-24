@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
         ("rstar", "Use R* algorithm")
         ("mrastar", "Use MRA* algorithm")
         ("seed", "R*/MRA* random seed", cxxopts::value<std::size_t>()->default_value("239"))
+        ("astar_weight", "A* heuristic weight", cxxopts::value<double>())
         ("rstar_delta", "R* delta", cxxopts::value<double>())
         ("rstar_k", "R* k", cxxopts::value<std::size_t>())
         ("rstar_weight", "R* weight", cxxopts::value<double>())
@@ -85,11 +86,21 @@ int main(int argc, char* argv[]) {
     
     // std::cerr << getCurrentRSS() << ' ' << getPeakRSS() << '\n';
     // fill the memory so we can measure actual memory consumption through the difference of peak values
+    // this thing sometimes doesn't work :(
+
+    /*
+    constexpr auto PAGE_SIZE = 4096;
     auto memdiff = getPeakRSS() - getCurrentRSS();
+    if (memdiff > PAGE_SIZE) 
+        memdiff -= PAGE_SIZE;
     auto memfill = reinterpret_cast<char*>(malloc(memdiff));
     for (size_t i = 0; i < memdiff; i++)
         memfill[i] = i % 256;
-    assert(getPeakRSS() - getCurrentRSS() < 4*4096);
+    memdiff = getPeakRSS() - getCurrentRSS();
+    if (memdiff > 16 * PAGE_SIZE) {
+        std::cerr << "Failed to set current rss to peak rss. Diff: " << memdiff << '\n';
+        return 1;
+    }*/ 
 
     const size_t rssStart = getPeakRSS();
     using namespace std::chrono;
@@ -145,8 +156,11 @@ int main(int argc, char* argv[]) {
             optres = mrastar(map, startPos, goalPos, heuristic, dist);
         }
     } else {
+        auto weight = parseResult["astar_weight"].as<double>();
         optres = heuristicsearch::AStar<OpenSetDump<heuristicsearch::Position, double>>(
-            map, startPos, goalPos, heuristic, dist
+            map, startPos, goalPos, 
+            [&heuristic, weight](const auto &a, const auto &b) { return weight * heuristic(a, b); }, 
+            dist
         );
     }
     const size_t rssFinish = getPeakRSS();
