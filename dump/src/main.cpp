@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         ("rstar_ti_factor", "R* threshold inflation factor", cxxopts::value<double>()->default_value("1.3"))
         ("rstar_smart_iters_coef", "R* smart iters coef", cxxopts::value<std::size_t>()->default_value("8"))
         ("rstar_range_low_coef", "R* range low coef", cxxopts::value<double>()->default_value("0"))
-        ("mrastar_cell_sizes", "MRA* cell sizes", cxxopts::value<std::vector<std::size_t>>()->default_value({}))
+        ("mrastar_cell_sizes", "MRA* cell sizes", cxxopts::value<std::vector<std::size_t>>())
         ("mrastar_weight", "MRA* weight", cxxopts::value<double>())
         ("mrastar_suboptimality_coef", "MRA* suboptimality coef", cxxopts::value<double>())
         ("mrastar_choose_queue_method", "MRA* meta algorithm (round_robin/meta_astar/dts)", cxxopts::value<std::string>()->default_value("round_robin"))
@@ -57,10 +57,14 @@ int main(int argc, char* argv[]) {
         throw std::invalid_argument("unknown metric: " + metric);
     };
 
+    assert(parseResult["out"].count());
     auto out = parseResult["out"].as<std::filesystem::path>();
+    assert(parseResult["map"].count());
     auto mapPath = parseResult["map"].as<std::filesystem::path>();
     auto map = heuristicsearch::Map::fromMovingAI(mapPath);
+    assert(parseResult["start"].count());
     auto startPos = parsePosition("start");
+    assert(parseResult["goal"].count());
     auto goalPos = parsePosition("goal");
     auto heuristic = parseMetric("heuristic");
     auto dist = parseMetric("dist");
@@ -76,8 +80,11 @@ int main(int argc, char* argv[]) {
     std::optional<heuristicsearch::HeuristicAlgoResult> optres;
 
     if (parseResult.count("rstar")) {
+        assert(parseResult["rstar_delta"].count());
         auto delta = parseResult["rstar_delta"].as<double>();
+        assert(parseResult["rstar_k"].count());
         auto k = parseResult["rstar_k"].as<std::size_t>();
+        assert(parseResult["rstar_weight"].count());
         auto weight = parseResult["rstar_weight"].as<double>();
         auto thresholdInflationFactor = parseResult["rstar_ti_factor"].as<double>();
         auto smartItersCoef = parseResult["rstar_smart_iters_coef"].as<std::size_t>();
@@ -89,14 +96,11 @@ int main(int argc, char* argv[]) {
         };
         optres = rstar(map, startPos, goalPos, heuristic, dist);
     } else if (parseResult.count("mrastar")) {
-        /*
-         * ("mrastar_weight", "MRA* weight", cxxopts::value<double>())
-        ("mrastar_cell_sizes", "MRA* cell sizes", cxxopts::value<std::vector<std::size_t>>()->default_value({}))
-        ("mrastar_suboptimality_coef", "MRA* suboptimality coef", cxxopts::value<double>())
-        ("mrastar_choose_queue_method", "MRA* meta algorithm", cxxopts::value<std::string>())
-         */
+        assert(parseResult["mrastar_cell_sizes"].count());
         auto cellSizes = parseResult["mrastar_cell_sizes"].as<std::vector<std::size_t>>();
+        assert(parseResult["mrastar_weight"].count());
         auto weight = parseResult["mrastar_weight"].as<double>();
+        assert(parseResult["mrastar_suboptimality_coef"].count());
         auto suboptimalityCoef = parseResult["mrastar_suboptimality_coef"].as<double>();
         auto chooseQueueMethod = parseResult["mrastar_choose_queue_method"].as<std::string>();
         auto thompsonHistoryCoef = parseResult["mrastar_thompson_history_coef"].as<double>();
