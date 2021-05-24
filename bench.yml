@@ -3,33 +3,205 @@ sc-broken-steppes:
     map: ./dataset/starcraft/BrokenSteppes.map
     scen: ./dataset/starcraft/BrokenSteppes.map.scen.thin
     timeout: 5.0
-    astar:
-        skip: false
-        w=1:
+    astar:        
+        w1:
             weight: 1.0
-        w=2:
-            weight: 2.0
-        w=5:
-            weight: 5.0
+        w3:
+            weight: 3.0
+        w9:
+            weight: 9.0
     rstar:
-        skip: false
-        d15k10w3:
-            delta: 15
+        delta10k8w1.5:
+            delta: 10
+            k: 8
+            weight: 1.5
+        delta10k16w1.5:
+            delta: 10
+            k: 16
+            weight: 1.5
+
+        delta10k8w3:
+            delta: 10
+            k: 8
+            weight: 3
+        delta10k8w5:
+            delta: 10
+            k: 8
+            weight: 5
+
+        delta20k25w3:
+            delta: 20
+            k: 25
+            weight: 3.0
+        delta50k65w3:
+            delta: 50
+            k: 65
+            weight: 3.0
+
+        delta50k65w7:
+            delta: 50
+            k: 65
+            weight: 7.0
+
+            
+sc-legacy:
+    skip: false
+    map: ./dataset/starcraft/Legacy.map
+    scen: ./dataset/starcraft/Legacy.map.scen.thin
+    timeout: 5.0
+    astar:        
+        w1:
+            weight: 1.0
+        w3:
+            weight: 3.0
+        w9:
+            weight: 9.0
+    rstar:
+        delta7k10w1.5:
+            delta: 7
+            k: 10
+            weight: 1.5
+        delta10k16w1.5:
+            delta: 10
+            k: 16
+            weight: 1.5
+        delta20k36w1.5:
+            delta: 20
+            k: 36
+            weight: 1.5
+        delta40k50w1.5:
+            delta: 40
+            k: 50
+            weight: 1.5
+        delta7k10w3:
+            delta: 7
             k: 10
             weight: 3.0
-        d15k10w5:
-            delta: 15
-            k: 10
-            weight: 5.0
-        d30k20w7:
-            delta: 30
-            k: 20
-            weight: 7.0
-    mrastar:
-        skip: false
-        c1..8w2sc3:
-            cell_sizes: [1, 2, 4, 8]
-            weight: 2.0
-            suboptimality_coef: 3.0
-            
+        delta10k16w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        delta20k36w3:
+            delta: 20
+            k: 36
+            weight: 3.0
+        delta40k50w3:
+            delta: 40
+            k: 50
+            weight: 3.0
+
+sc-wheel-of-war:
+    skip: false
+    map: ./dataset/starcraft/WheelofWar.map
+    scen: ./dataset/starcraft/WheelofWar.map.scen.thin
+    timeout: 5.0
+    astar:        
+        w1:
+            weight: 1.0
+        w3:
+            weight: 3.0
+        w9:
+            weight: 9.0
+    rstar:  
+        delta10k16w1.5:
+            delta: 10
+            k: 16
+            weight: 1.5
+        delta20k36w1.5:
+            delta: 20
+            k: 36
+            weight: 1.5
+        delta40k50w1.5:
+            delta: 40
+            k: 50
+            weight: 1.5
+        delta10k16w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        delta20k36w3:
+            delta: 20
+            k: 36
+            weight: 3.0
+        delta40k50w3:
+            delta: 40
+            k: 50
+            weight: 3.0
+
+
+cities-milan:
+    skip: false
+    map: ./dataset/cities/Milan_1_1024.map
+    scen: ./dataset/cities/Milan_1_1024.map.scen.thin
+    timeout: 5.0
+    astar:        
+        w1:
+            weight: 1.0
+        w3:
+            weight: 3.0
+        w9:
+            weight: 9.0
+    rstar:
+        delta10k16w1.5:
+            delta: 10
+            k: 16
+            weight: 1.5
+        delta20k36w1.5:
+            delta: 20
+            k: 36
+            weight: 1.5
+        delta40k50w1.5:
+            delta: 40
+            k: 50
+            weight: 1.5
+        delta10k16w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        delta20k36w3:
+            delta: 20
+            k: 36
+            weight: 3.0
+        delta40k50w3:
+            delta: 40
+            k: 50
+            weight: 3.0
+
+cities-newyork:
+    skip: false
+    map: ./dataset/cities/NewYork_1_1024.map
+    scen: ./dataset/cities/NewYork_1_1024.map.scen.thin
+    timeout: 5.0
+    astar:        
+        w1:
+            weight: 1.0
+        w3:
+            weight: 3.0
+        w9:
+            weight: 9.0
+    rstar:
+        delta10k16w1.5:
+            delta: 10
+            k: 16
+            weight: 1.5
+        delta20k36w1.5:
+            delta: 20
+            k: 36
+            weight: 1.5
+        delta40k50w1.5:
+            delta: 40
+            k: 50
+            weight: 1.5
+        delta10k16w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        delta20k36w3:
+            delta: 20
+            k: 36
+            weight: 3.0
+        delta40k50w3:
+            delta: 40
+            k: 50
+            weight: 3.0
 
