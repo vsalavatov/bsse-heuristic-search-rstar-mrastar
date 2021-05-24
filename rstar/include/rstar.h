@@ -68,6 +68,7 @@ std::optional<heuristicsearch::HeuristicAlgoResult> RStar<OpenSetT>::operator()(
     randomGen_.seed(randomSeed_);
     auto open = OpenSetT();
     auto closed = ClosedSet<Position>();
+    std::size_t totalExpansions = 0;
 
     std::unordered_map<Position, double> gvalue;
     std::unordered_map<Position, int> avoid;
@@ -91,6 +92,7 @@ std::optional<heuristicsearch::HeuristicAlgoResult> RStar<OpenSetT>::operator()(
         if (thresh < weight_ * heuristic(bpNode, node) + EPS)
             thresh = weight_ * heuristic(bpNode, node) + EPS;
         BoundedAStarResult basr = BoundedAStar(thresh, weight_, map, bpNode, node, heuristic, dist);
+        totalExpansions += basr.doneExpansions;
         if (basr.result) {
             parent[node].second = std::move(basr.result->path);
         }
@@ -138,7 +140,8 @@ std::optional<heuristicsearch::HeuristicAlgoResult> RStar<OpenSetT>::operator()(
             succs.begin(), succs.end(),
             [&closed](const Position &p) { return closed.contains(p); }
         ), succs.end());
-
+        
+        totalExpansions++;
         for (auto &next : succs) {
             gammaBackEdges[next].push_back(node);
             cLow[{node, next}] = heuristic(node, next);
@@ -172,7 +175,8 @@ std::optional<heuristicsearch::HeuristicAlgoResult> RStar<OpenSetT>::operator()(
 
     return HeuristicAlgoResult{
         std::move(path),
-        gvalue[goalPos]
+        gvalue[goalPos],
+        totalExpansions
     };
 }
 

@@ -61,7 +61,7 @@ BoundedAStarResult BoundedAStar(
     std::reverse(path.begin(), path.end());
 
     return BoundedAStarResult{
-        HeuristicAlgoResult{ std::move(path), gvalue[goalPos] },
+        HeuristicAlgoResult{ std::move(path), gvalue[goalPos], doneExpansions },
         doneExpansions,
         gvalue[goalPos]
     };

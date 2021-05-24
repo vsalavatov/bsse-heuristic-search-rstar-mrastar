@@ -11,6 +11,7 @@ namespace heuristicsearch {
 struct HeuristicAlgoResult {
     std::vector<Position> path;
     double distance;
+    std::size_t expansions;
 };
 
 }
