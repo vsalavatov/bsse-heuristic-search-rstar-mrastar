@@ -149,7 +149,30 @@ def run_rstar(map_path, params, task, timeout, resultsdir):
 
 
 def run_mrastar(map_path, params, task, timeout, resultsdir):
-    pass
+    logfile = os.path.join(resultsdir, 'log')
+    try:
+        cell_sizes = params['cell_sizes']        
+        weight = params['weight']
+        suboptimality_coef = params['suboptimality_coef']
+    except:
+        msg = f'Expected "cell_sizes", "weight", "suboptimality_coef" fields in MRA* parametrization: {params}'
+        status_report(msg, True)
+        raise AssertionError(msg)
+    choose_queue_method = params.get('choose_queue_method', 'round_robin')
+    thompson_history_coef = params.get('thompson_history_coef', 10)
+    run_dump([
+        './build/dump/dump',
+        '--out', logfile,
+        '--map', map_path,
+        '--start', f'{task.start_row} {task.start_col}',
+        '--goal', f'{task.goal_row} {task.goal_col}',
+        '--mrastar',
+        '--mrastar_cell_sizes', ','.join(map(str, cell_sizes)),
+        '--mrastar_weight', f'{weight}',
+        '--mrastar_suboptimality_coef', f'{suboptimality_coef}',
+        '--mrastar_choose_queue_method', f'{choose_queue_method}',
+        '--mrastar_thompson_history_coef', f'{thompson_history_coef}'
+    ], timeout, logfile)
 
 
 if __name__ == '__main__':

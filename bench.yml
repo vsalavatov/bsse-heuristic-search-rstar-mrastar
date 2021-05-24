@@ -12,6 +12,7 @@ sc-broken-steppes:
         w=5:
             weight: 5.0
     rstar:
+        skip: false
         d15k10w3:
             delta: 15
             k: 10
@@ -25,7 +26,10 @@ sc-broken-steppes:
             k: 20
             weight: 7.0
     mrastar:
-        skip: true
-        w=1:
-            kek: bek
+        skip: false
+        c1..8w2sc3:
+            cell_sizes: [1, 2, 4, 8]
+            weight: 2.0
+            suboptimality_coef: 3.0
+            
 
