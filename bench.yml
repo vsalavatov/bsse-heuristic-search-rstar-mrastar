@@ -1,9 +1,9 @@
 sc-broken-steppes:
-    skip: false
     map: ./dataset/starcraft/BrokenSteppes.map
     scen: ./dataset/starcraft/BrokenSteppes.map.scen.thin
     timeout: 5.0
     astar:        
+        skip: true
         w1:
             weight: 1.0
         w3:
@@ -11,6 +11,7 @@ sc-broken-steppes:
         w9:
             weight: 9.0
     rstar:
+        skip: true
         delta10k8w1.5:
             delta: 10
             k: 8
@@ -45,11 +46,11 @@ sc-broken-steppes:
 
             
 sc-legacy:
-    skip: false
     map: ./dataset/starcraft/Legacy.map
     scen: ./dataset/starcraft/Legacy.map.scen.thin
     timeout: 5.0
-    astar:        
+    astar:
+        skip: true  
         w1:
             weight: 1.0
         w3:
@@ -57,6 +58,7 @@ sc-legacy:
         w9:
             weight: 9.0
     rstar:
+        skip: true
         delta7k10w1.5:
             delta: 7
             k: 10
@@ -64,14 +66,6 @@ sc-legacy:
         delta10k16w1.5:
             delta: 10
             k: 16
-            weight: 1.5
-        delta20k36w1.5:
-            delta: 20
-            k: 36
-            weight: 1.5
-        delta40k50w1.5:
-            delta: 40
-            k: 50
             weight: 1.5
         delta7k10w3:
             delta: 7
@@ -95,7 +89,8 @@ sc-wheel-of-war:
     map: ./dataset/starcraft/WheelofWar.map
     scen: ./dataset/starcraft/WheelofWar.map.scen.thin
     timeout: 5.0
-    astar:        
+    astar: 
+        skip: true
         w1:
             weight: 1.0
         w3:
@@ -103,6 +98,7 @@ sc-wheel-of-war:
         w9:
             weight: 9.0
     rstar:  
+        skip: true
         delta10k16w1.5:
             delta: 10
             k: 16
@@ -110,10 +106,6 @@ sc-wheel-of-war:
         delta20k36w1.5:
             delta: 20
             k: 36
-            weight: 1.5
-        delta40k50w1.5:
-            delta: 40
-            k: 50
             weight: 1.5
         delta10k16w3:
             delta: 10
@@ -134,7 +126,8 @@ cities-milan:
     map: ./dataset/cities/Milan_1_1024.map
     scen: ./dataset/cities/Milan_1_1024.map.scen.thin
     timeout: 5.0
-    astar:        
+    astar: 
+        skip: true       
         w1:
             weight: 1.0
         w3:
@@ -142,6 +135,7 @@ cities-milan:
         w9:
             weight: 9.0
     rstar:
+        skip: true
         delta10k16w1.5:
             delta: 10
             k: 16
@@ -172,7 +166,8 @@ cities-newyork:
     map: ./dataset/cities/NewYork_1_1024.map
     scen: ./dataset/cities/NewYork_1_1024.map.scen.thin
     timeout: 5.0
-    astar:        
+    astar:
+        skip: true 
         w1:
             weight: 1.0
         w3:
@@ -180,6 +175,7 @@ cities-newyork:
         w9:
             weight: 9.0
     rstar:
+        skip: true
         delta10k16w1.5:
             delta: 10
             k: 16
