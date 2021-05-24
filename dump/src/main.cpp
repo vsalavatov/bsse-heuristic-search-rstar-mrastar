@@ -4,13 +4,17 @@
 #include "astar.h"
 #include "rstar.h"
 #include "mrastar.h"
+#include "rss_check.h"
 
 #include <cxxopts.hpp>
 #include <exception>
 #include <fstream>
+#include <chrono>
+
 
 
 int main(int argc, char* argv[]) {
+    
     cxxopts::Options options{"dump", "Dump heuristic search algorithm statistics"};
     options.add_options()
         ("out", "Output file path", cxxopts::value<std::filesystem::path>())
@@ -74,11 +78,22 @@ int main(int argc, char* argv[]) {
     DumpInfo::logAll(parseResult["full"].as<bool>());
 
     os << std::filesystem::absolute(mapPath) << "\n"
-       << startPos.row << " " << startPos.col << "\n"
-       << goalPos.row << " " << goalPos.col << "\n";
+       << "start " << startPos.row << " " << startPos.col << "\n"
+       << "goal " << goalPos.row << " " << goalPos.col << "\n";
 
     std::optional<heuristicsearch::HeuristicAlgoResult> optres;
+    
+    // std::cerr << getCurrentRSS() << ' ' << getPeakRSS() << '\n';
+    // fill the memory so we can measure actual memory consumption through the difference of peak values
+    auto memdiff = getPeakRSS() - getCurrentRSS();
+    auto memfill = reinterpret_cast<char*>(malloc(memdiff));
+    for (size_t i = 0; i < memdiff; i++)
+        memfill[i] = i % 256;
+    assert(getPeakRSS() - getCurrentRSS() < 4*4096);
 
+    const size_t rssStart = getPeakRSS();
+    using namespace std::chrono;
+    const auto timeStart = high_resolution_clock::now();
     if (parseResult.count("rstar")) {
         assert(parseResult["rstar_delta"].count());
         auto delta = parseResult["rstar_delta"].as<double>();
@@ -134,12 +149,18 @@ int main(int argc, char* argv[]) {
             map, startPos, goalPos, heuristic, dist
         );
     }
+    const size_t rssFinish = getPeakRSS();
+    const auto timeFinish = high_resolution_clock::now();
+    os << "memory " << (rssFinish - rssStart) << '\n';
+    os << "time " << std::setprecision(6) << duration_cast<milliseconds>(timeFinish - timeStart).count() / 1000.0 << '\n';
 
     if (!optres.has_value()) {
-        os << "rip\n";
+        os << "no path\n";
     } else {
         auto result = *optres;
-        os << "path " << std::setprecision(10) << result.distance << " " << result.path.size() << "\n";
+        os << "expansions " << result.expansions << '\n';
+        os << "distance " << std::setprecision(10) << result.distance << '\n';
+        os << "path " << result.path.size() << "\n";        
         for (const auto& p : result.path) {
             os << p.row << " " << p.col << "\n";
         }
