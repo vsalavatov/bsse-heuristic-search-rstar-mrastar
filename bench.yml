@@ -1,0 +1,31 @@
+sc-broken-steppes:
+    skip: false
+    map: ./dataset/starcraft/BrokenSteppes.map
+    scen: ./dataset/starcraft/BrokenSteppes.map.scen.thin
+    timeout: 5.0
+    astar:
+        skip: false
+        w=1:
+            weight: 1.0
+        w=2:
+            weight: 2.0
+        w=5:
+            weight: 5.0
+    rstar:
+        d15k10w3:
+            delta: 15
+            k: 10
+            weight: 3.0
+        d15k10w5:
+            delta: 15
+            k: 10
+            weight: 5.0
+        d30k20w7:
+            delta: 30
+            k: 20
+            weight: 7.0
+    mrastar:
+        skip: true
+        w=1:
+            kek: bek
+
