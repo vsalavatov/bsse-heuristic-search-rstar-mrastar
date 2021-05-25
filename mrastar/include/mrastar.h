@@ -72,6 +72,7 @@ std::optional<heuristicsearch::HeuristicAlgoResult> MRAStar<ChooseQueueMethod, O
 
     std::vector<OpenSetWithMinHeuristic<OpenSet<Position, double>>> open{cellSizes_.size()};
     std::vector<ClosedSet<Position>> closed{cellSizes_.size()};
+    std::size_t expansions = 0;
 
     std::unordered_map<Position, double> gvalue;
     std::unordered_map<Position, Position> parent;
@@ -83,6 +84,7 @@ std::optional<heuristicsearch::HeuristicAlgoResult> MRAStar<ChooseQueueMethod, O
         return gvalue[node] + weight_ * heuristic(node, goalPos);
     };
     auto expand = [&](Position node, int level) {
+        expansions++;
         for (auto& succ : multiResolutionMap.getNeighbors(node, cellSizes_[level])) {
             auto newGValue = gvalue[node] + dist(node, succ);
             if (!gvalue.contains(succ) || gvalue[succ] > newGValue) {
@@ -150,7 +152,8 @@ std::optional<heuristicsearch::HeuristicAlgoResult> MRAStar<ChooseQueueMethod, O
 
     return HeuristicAlgoResult{
             std::move(path),
-            gvalue[goalPos]
+            gvalue[goalPos],
+            expansions
     };
 }
 

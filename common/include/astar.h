@@ -28,6 +28,7 @@ std::optional<HeuristicAlgoResult> AStar(
     using namespace heuristicsearch;
 
     auto open = OpenSetT();
+    std::size_t expansions = 0;
 
     std::unordered_map<Position, double> gvalue;
     std::unordered_map<Position, Position> parent;
@@ -36,13 +37,14 @@ std::optional<HeuristicAlgoResult> AStar(
 
     gvalue[startPos] = 0;
     open.addNodeOrDecreasePriority(startPos, priority(startPos));
-
+    
     while (!open.isEmpty()) {
         auto [node, fval] = open.popMin();
 
         if (gvalue.contains(goalPos) && fval > gvalue[goalPos])
             break;
 
+        expansions++;
         for (auto& succ : map.getNeighbors(node)) {
             auto newGValue = gvalue[node] + dist(node, succ);
             if (!gvalue.contains(succ) || gvalue[succ] > newGValue) {
@@ -66,7 +68,8 @@ std::optional<HeuristicAlgoResult> AStar(
 
     return HeuristicAlgoResult{
             std::move(path),
-            gvalue[goalPos]
+            gvalue[goalPos],
+            expansions
     };
 }
 
