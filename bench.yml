@@ -4,6 +4,10 @@ sc-broken-steppes:
     timeout: 5.0
     astar:        
         skip: true
+        best_w3:
+            weight: 3.0
+        best_w9:
+            weight: 9.0
         w1:
             weight: 1.0
         w3:
@@ -12,6 +16,14 @@ sc-broken-steppes:
             weight: 9.0
     rstar:
         skip: true
+        best_w3:
+            delta: 10
+            k: 8
+            weight: 3.0
+        best_w9:
+            delta: 10
+            k: 8
+            weight: 9.0
         delta10k8w1.5:
             delta: 10
             k: 8
@@ -44,215 +56,156 @@ sc-broken-steppes:
             k: 65
             weight: 7.0
     mrastar:
-        skip: true
-        c1..1_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1 ]
+        best_w3:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqrr:
-            skip: false
+            suboptimality_coef: 3.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        best_w9:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            weight: 9.0
+            suboptimality_coef: 9.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        ncells_rr_c002_w3_sc5_cqrr:
             cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..4_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c004_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..8_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c008_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..16_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c016_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..32_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c032_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..64_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c064_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..128_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64, 128 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c002_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..4_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c004_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..8_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c008_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..16_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c016_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..32_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c032_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..64_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c064_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..2_w3_sc5_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16 ]
+        ncells_dts_c002_w3_sc5_cqdts:
+            cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..4_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c004_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..8_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c008_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c016_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..32_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c032_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..64_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c064_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts_h3:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h003:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 3
-        c1..16_w3_sc5_cqdts_h5:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h005:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 5
-        c1..16_w3_sc5_cqdts_h10:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h010:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 10
-        c1..16_w3_sc5_cqdts_h15:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h15:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 15
-        c1..16_w3_sc5_cqdts_h20:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h020:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 20
-        c1..32_w3_sc5_cqdts_h3:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+        hc_c016_w3_sc5_cqdts_h030:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 3
-        c1..32_w3_sc5_cqdts_h5:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 30
+        hc_c016_w3_sc5_cqdts_h050:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 5
-        c1..32_w3_sc5_cqdts_h10:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 50
+        hc_c016_w3_sc5_cqdts_h100:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 10
-        c1..32_w3_sc5_cqdts_h15:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 15
-        c1..32_w3_sc5_cqdts_h20:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 20
-        c1..64_w3_sc100_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: round_robin
-        c1..64_w3_sc100_cqma:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: meta_astar
-        c1..64_w3_sc100_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: dts
+            thompson_history_coef: 100
 
 
             
@@ -262,6 +215,10 @@ sc-legacy:
     timeout: 5.0
     astar:
         skip: true  
+        best_w3:
+            weight: 3.0
+        best_w9:
+            weight: 9.0
         w1:
             weight: 1.0
         w3:
@@ -295,214 +252,156 @@ sc-legacy:
             k: 50
             weight: 3.0
     mrastar:
-        c1..1_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1 ]
+        best_w3:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqrr:
-            skip: false
+            suboptimality_coef: 3.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        best_w9:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
+            weight: 9.0
+            suboptimality_coef: 9.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        ncells_rr_c002_w3_sc5_cqrr:
             cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..4_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c004_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..8_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c008_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..16_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c016_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..32_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c032_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..64_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c064_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..128_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64, 128 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c002_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..4_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c004_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..8_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c008_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..16_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c016_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..32_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c032_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..64_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c064_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..2_w3_sc5_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16 ]
+        ncells_dts_c002_w3_sc5_cqdts:
+            cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..4_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c004_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..8_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c008_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c016_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..32_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c032_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..64_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c064_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts_h3:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h003:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 3
-        c1..16_w3_sc5_cqdts_h5:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h005:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 5
-        c1..16_w3_sc5_cqdts_h10:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h010:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 10
-        c1..16_w3_sc5_cqdts_h15:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h15:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 15
-        c1..16_w3_sc5_cqdts_h20:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h020:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 20
-        c1..32_w3_sc5_cqdts_h3:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+        hc_c016_w3_sc5_cqdts_h030:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 3
-        c1..32_w3_sc5_cqdts_h5:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 30
+        hc_c016_w3_sc5_cqdts_h050:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 5
-        c1..32_w3_sc5_cqdts_h10:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 50
+        hc_c016_w3_sc5_cqdts_h100:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 10
-        c1..32_w3_sc5_cqdts_h15:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 15
-        c1..32_w3_sc5_cqdts_h20:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 20
-        c1..64_w3_sc100_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: round_robin
-        c1..64_w3_sc100_cqma:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: meta_astar
-        c1..64_w3_sc100_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: dts
+            thompson_history_coef: 100
 
 sc-wheel-of-war:
     skip: false
@@ -511,6 +410,10 @@ sc-wheel-of-war:
     timeout: 5.0
     astar: 
         skip: true
+        best_w3:
+            weight: 3.0
+        best_w9:
+            weight: 9.0
         w1:
             weight: 1.0
         w3:
@@ -519,6 +422,14 @@ sc-wheel-of-war:
             weight: 9.0
     rstar:  
         skip: true
+        best_w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        best_w9:
+            delta: 10
+            k: 16
+            weight: 9.0
         delta10k16w1.5:
             delta: 10
             k: 16
@@ -540,214 +451,157 @@ sc-wheel-of-war:
             k: 50
             weight: 3.0
     mrastar:
-        c1..1_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1 ]
+        skip: true
+        best_w3:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqrr:
-            skip: false
+            suboptimality_coef: 3.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        best_w9:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            weight: 9.0
+            suboptimality_coef: 9.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        ncells_rr_c002_w3_sc5_cqrr:
             cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..4_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c004_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..8_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c008_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..16_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c016_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..32_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c032_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..64_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c064_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..128_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64, 128 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c002_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..4_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c004_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..8_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c008_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..16_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c016_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..32_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c032_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..64_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c064_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..2_w3_sc5_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16 ]
+        ncells_dts_c002_w3_sc5_cqdts:
+            cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..4_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c004_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..8_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c008_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c016_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..32_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c032_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..64_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c064_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts_h3:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h003:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 3
-        c1..16_w3_sc5_cqdts_h5:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h005:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 5
-        c1..16_w3_sc5_cqdts_h10:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h010:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 10
-        c1..16_w3_sc5_cqdts_h15:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h15:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 15
-        c1..16_w3_sc5_cqdts_h20:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h020:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 20
-        c1..32_w3_sc5_cqdts_h3:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+        hc_c016_w3_sc5_cqdts_h030:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 3
-        c1..32_w3_sc5_cqdts_h5:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 30
+        hc_c016_w3_sc5_cqdts_h050:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 5
-        c1..32_w3_sc5_cqdts_h10:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 50
+        hc_c016_w3_sc5_cqdts_h100:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 10
-        c1..32_w3_sc5_cqdts_h15:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 15
-        c1..32_w3_sc5_cqdts_h20:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 20
-        c1..64_w3_sc100_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: round_robin
-        c1..64_w3_sc100_cqma:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: meta_astar
-        c1..64_w3_sc100_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: dts
+            thompson_history_coef: 100
 
 
 cities-milan:
@@ -757,6 +611,10 @@ cities-milan:
     timeout: 5.0
     astar: 
         skip: true       
+        best_w3:
+            weight: 3.0
+        best_w9:
+            weight: 9.0
         w1:
             weight: 1.0
         w3:
@@ -765,6 +623,14 @@ cities-milan:
             weight: 9.0
     rstar:
         skip: true
+        best_w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        best_w9:
+            delta: 10
+            k: 16
+            weight: 9.0
         delta10k16w1.5:
             delta: 10
             k: 16
@@ -790,214 +656,157 @@ cities-milan:
             k: 50
             weight: 3.0
     mrastar:
-        c1..1_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1 ]
+        skip: true
+        best_w3:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqrr:
-            skip: false
+            suboptimality_coef: 3.0
+            choose_queue_method: dts
+            thompson_history_coef: 100
+        best_w9:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            weight: 9.0
+            suboptimality_coef: 9.0
+            choose_queue_method: dts
+            thompson_history_coef: 100
+        ncells_rr_c002_w3_sc5_cqrr:
             cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..4_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c004_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..8_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c008_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..16_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c016_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..32_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c032_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..64_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c064_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..128_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64, 128 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c002_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..4_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c004_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..8_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c008_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..16_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c016_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..32_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c032_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..64_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c064_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..2_w3_sc5_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16 ]
+        ncells_dts_c002_w3_sc5_cqdts:
+            cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..4_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c004_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..8_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c008_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c016_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..32_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c032_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..64_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c064_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts_h3:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h003:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 3
-        c1..16_w3_sc5_cqdts_h5:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h005:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 5
-        c1..16_w3_sc5_cqdts_h10:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h010:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 10
-        c1..16_w3_sc5_cqdts_h15:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h15:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 15
-        c1..16_w3_sc5_cqdts_h20:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h020:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 20
-        c1..32_w3_sc5_cqdts_h3:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+        hc_c016_w3_sc5_cqdts_h030:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 3
-        c1..32_w3_sc5_cqdts_h5:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 30
+        hc_c016_w3_sc5_cqdts_h050:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 5
-        c1..32_w3_sc5_cqdts_h10:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 50
+        hc_c016_w3_sc5_cqdts_h100:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 10
-        c1..32_w3_sc5_cqdts_h15:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 15
-        c1..32_w3_sc5_cqdts_h20:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 20
-        c1..64_w3_sc100_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: round_robin
-        c1..64_w3_sc100_cqma:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: meta_astar
-        c1..64_w3_sc100_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: dts
+            thompson_history_coef: 100
 
 cities-newyork:
     skip: false
@@ -1006,6 +815,10 @@ cities-newyork:
     timeout: 5.0
     astar:
         skip: true 
+        best_w3:
+            weight: 3.0
+        best_w9:
+            weight: 9.0
         w1:
             weight: 1.0
         w3:
@@ -1014,6 +827,14 @@ cities-newyork:
             weight: 9.0
     rstar:
         skip: true
+        best_w3:
+            delta: 10
+            k: 16
+            weight: 3.0
+        best_w9:
+            delta: 10
+            k: 16
+            weight: 9.0
         delta10k16w1.5:
             delta: 10
             k: 16
@@ -1039,212 +860,155 @@ cities-newyork:
             k: 50
             weight: 3.0
     mrastar:
-        c1..1_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1 ]
+        skip: true
+        best_w3:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqrr:
-            skip: false
+            suboptimality_coef: 3.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        best_w9:
+            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            weight: 9.0
+            suboptimality_coef: 9.0
+            choose_queue_method: dts
+            thompson_history_coef: 20
+        ncells_rr_c002_w3_sc5_cqrr:
             cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..4_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c004_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..8_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c008_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..16_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c016_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..32_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c032_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..64_w3_sc5_cqrr:
-            skip: false
+        ncells_rr_c064_w3_sc5_cqrr:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: round_robin
-        c1..128_w3_sc5_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64, 128 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: round_robin
-        c1..2_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c002_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..4_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c004_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..8_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c008_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..16_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c016_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..32_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c032_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..64_w3_sc5_cqma:
-            skip: false
+        ncells_ma_c064_w3_sc5_cqma:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: meta_astar
-        c1..2_w3_sc5_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16 ]
+        ncells_dts_c002_w3_sc5_cqdts:
+            cell_sizes: [ 1, 2 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..4_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c004_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..8_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c008_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c016_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..32_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c032_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..64_w3_sc5_cqdts:
-            skip: false
+        ncells_dts_c064_w3_sc5_cqdts:
             cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-        c1..16_w3_sc5_cqdts_h3:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h003:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 3
-        c1..16_w3_sc5_cqdts_h5:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h005:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 5
-        c1..16_w3_sc5_cqdts_h10:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h010:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 10
-        c1..16_w3_sc5_cqdts_h15:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h15:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 15
-        c1..16_w3_sc5_cqdts_h20:
-            skip: false
+        hc_c016_w3_sc5_cqdts_h020:
             cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
             thompson_history_coef: 20
-        c1..32_w3_sc5_cqdts_h3:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+        hc_c016_w3_sc5_cqdts_h030:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 3
-        c1..32_w3_sc5_cqdts_h5:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 30
+        hc_c016_w3_sc5_cqdts_h050:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 5
-        c1..32_w3_sc5_cqdts_h10:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
+            thompson_history_coef: 50
+        hc_c016_w3_sc5_cqdts_h100:
+            cell_sizes: [ 1, 2, 4, 8, 16 ]
             weight: 3.0
-            suboptimality_coef: 5.0,
+            suboptimality_coef: 5.0
             choose_queue_method: dts
-            thompson_history_coef: 10
-        c1..32_w3_sc5_cqdts_h15:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 15
-        c1..32_w3_sc5_cqdts_h20:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32 ]
-            weight: 3.0
-            suboptimality_coef: 5.0,
-            choose_queue_method: dts
-            thompson_history_coef: 20
-        c1..64_w3_sc100_cqrr:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: round_robin
-        c1..64_w3_sc100_cqma:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: meta_astar
-        c1..64_w3_sc100_cqdts:
-            skip: false
-            cell_sizes: [ 1, 2, 4, 8, 16, 32, 64 ]
-            weight: 3.0
-            suboptimality_coef: 100.0,
-            choose_queue_method: dts
+            thompson_history_coef: 100
 
